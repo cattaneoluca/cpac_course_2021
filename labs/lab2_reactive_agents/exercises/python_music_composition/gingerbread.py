@@ -1,4 +1,5 @@
     
+from _typeshed import Self
 import platform
 import sys
 import time
@@ -15,6 +16,8 @@ class Gingerbread(Composition):
         self.max=8
         self.range=self.max-self.min 
         # your code here
+        self.x = -0.1
+        self.y = 0.1
         
     def map(self, value_in, min_out, max_out):
         value_out = (value_in-self.min)/(self.range)
@@ -23,7 +26,16 @@ class Gingerbread(Composition):
 
     def next(self):
         # your code here
-        pass
+
+        self.amp = 1
+        x_old = self.x
+        y_old = self.y
+        self.x = 1-y_old+abs(x_old)
+        self.y = x_old
+        self.midinote = int(self.map(self.y,60,84))
+        self.dur = int(self.map(self.x,0.125,1))
+        #print(self.x,self.y)
+        
     
 if __name__=="__main__":
     n_agents=1
