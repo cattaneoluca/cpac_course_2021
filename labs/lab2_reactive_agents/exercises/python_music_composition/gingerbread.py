@@ -3,9 +3,7 @@ from _typeshed import Self
 import platform
 import sys
 import time
-import numpy as np
-
-from constants import ID_START
+import numpy as np2
     
 from classes import Agent, Composition
 
