@@ -27,6 +27,17 @@ void setup(){
 PVector computeGravityForce(AgentMover mover){
   PVector attr_force;
   /* your code here */
+  PVector versor;
+  
+  versor = PVector.sub(pos_attractor,mover.position);
+  dist = versor.mag();
+  dist = constrain(dist,dist_min,dist_max);
+  versor.normalize();
+  
+  attr_force = versor;
+  attr_force.mult(mover.mass*mass_attractor/(dist*dist));
+  
+  /* your code here */
   return attr_force;
 }
 void sendEffect(float cutoff, float vibrato){
