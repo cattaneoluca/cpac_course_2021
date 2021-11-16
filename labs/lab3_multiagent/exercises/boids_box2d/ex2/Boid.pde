@@ -43,7 +43,21 @@ class Boid{
       
       for(Boid other: boids){        
         if(this.body==other.body){continue;}
-        // your code here        
+        // your code here   
+        otherPosW = other.body.getPosition();
+        otherVel = other.body.getLinearVelocity();
+        direction = otherPosW.sub(myPosW);
+        
+        if(direction.length()<AVOID_DIST){
+          direction.normalize();
+          direction.mulLocal(-50);
+          avoid_force.addLocal(direction);
+        }
+        else if(direction.length()<ALIGN_DIST) {
+          otherVel.normalize();
+          otherVel.mulLocal(2);
+          align_force.addLocal(otherVel);
+        }
       }
       if(avoid_force.length()>0){this.applyForce(avoid_force);}
       if(align_force.length()>0){this.applyForce(align_force);}
