@@ -5,6 +5,7 @@ float SCALE_STEPS[]={0, 50, 10};
 class Walker {
   PVector position;
   PVector prevPosition;
+  float stepsize;
   
   Walker() {
     this.position=new PVector(width/2, height/2);
@@ -16,7 +17,11 @@ class Walker {
     
     float normAngle= map(fromCenter.heading(), -PI, PI, 0, 1);
     /* your code */
-    
+    colorMode(HSB);
+    float normFromCenter = map(fromCenter.magSq(),0,MAX_DISTANCE,0,1);
+
+    stroke(normFromCenter*255,255,normAngle*255);
+    strokeWeight(this.stepsize*20);
     line(this.prevPosition.x, this.prevPosition.y,
          this.position.x, this.position.y);
 
@@ -27,6 +32,7 @@ class Walker {
     step=new PVector(random(-1,1), random(-1,1));
     step.normalize();
     float stepsize=montecarlo();
+    this.stepsize = stepsize;
     step.mult(stepsize*SCALE_STEPS[MONTECARLO_STEPS]);
     this.prevPosition=this.position.copy();   
     this.position.add(step);

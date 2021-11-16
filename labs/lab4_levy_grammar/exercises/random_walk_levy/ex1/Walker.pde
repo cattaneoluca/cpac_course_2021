@@ -11,12 +11,19 @@ class Walker {
   void draw() {    
     stroke(255);
     /* your code */
+    strokeWeight(3);
+    line(this.prevPosition.x,this.prevPosition.y, 
+            this.position.x, this.position.y);
+    this.prevPosition = this.position.copy();
   }
 
   void update() {    
-    PVector step;
+    PVector step = new PVector(random(-1,1),random(-1,1));
+    step.normalize();
     /* your code */
-    
+    float stepsize = montecarlo();
+    step.mult(stepsize*STEPSCALE);  
+
     this.position.add(step);
     this.position.x=constrain(this.position.x, 0, width);    
     this.position.y=constrain(this.position.y, 0, height);
@@ -25,4 +32,12 @@ class Walker {
 
 float montecarlo() {
   /* your code */
+  while(true){
+    float R1 = random(1);
+    float p = random(1);
+    float R2 = random(1);
+    
+    if(p>R2){return R1;}
+  }
+  
 }

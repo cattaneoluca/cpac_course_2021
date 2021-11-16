@@ -1,4 +1,5 @@
 float SCALE_STEPS[]={0, 50, 10}; 
+float POWER = 4;
 // use it as SCALE_STEPS[MONTECARLO_STEPS]
 
 
@@ -33,13 +34,16 @@ class Walker {
 float montecarlo() {
   while (true) {
      float R1, p, R2;
+     R1 = random(1);
+     R2 = random(1);
+     p=1;
      if(MONTECARLO_STEPS==2){
-        R1=random(1);
         p=random(1);
-        R2=random(1);
      }
      if(MONTECARLO_STEPS==1){
-        /* your code */        
+        /* your code */ 
+
+        p = pow(1-R1,POWER);
      }
      
      if (R2<p){ return R1;}
