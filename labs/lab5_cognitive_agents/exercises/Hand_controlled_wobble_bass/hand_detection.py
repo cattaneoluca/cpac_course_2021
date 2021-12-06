@@ -160,16 +160,16 @@ if __name__ == "__main__":
 			cv2.putText(clone, text, (70, 45), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
 			# Here we send the OSC message corresponding
-			#if START_SOUND:
-				#if class_test == 0:
+			if START_SOUND:
+				if class_test == 0:
 
-					#freq = # FILL THE CODE
-					#amp = # FILL THE CODE
-					#client.send_message(# FILL THE CODE)
-				#else:
-					#detune = # FILL THE CODE
-					#lfo = # FILL THE CODE
-					#client.send_message(# FILL THE CODE)
+					freq = (c_x/width_roi)*100 # from 0 to 100
+					amp = (c_y/height_roi) # from 0 to 1
+					client.send_message('/synth_control',['a', freq, amp])
+				else:
+					detune = (c_x/width_roi)*0.1
+					lfo = (c_y/height_roi)*10
+					client.send_message('/synth_control',['b', detune, lfo])
 		
 
 		# display the frame with segmented hand

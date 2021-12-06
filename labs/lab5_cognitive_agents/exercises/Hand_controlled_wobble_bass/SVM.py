@@ -56,7 +56,7 @@ def train_svm():
 
 	pca = PCA(n_components=150, svd_solver='randomized', whiten=True, random_state=42)
 	svc = SVC(kernel='rbf', class_weight='balanced')
-	#model = # FILL THE CODE
+	model = make_pipeline(pca, svc) # FILL THE CODE
 
 	with warnings.catch_warnings():
 		# ignore all caught warnings
@@ -69,6 +69,7 @@ def train_svm():
 
 	print('Fit the SVM model')
 	# FILL THE CODE
+	grid.fit(xtrain,ytrain)
 
 	print(grid.best_params_)
 
