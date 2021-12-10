@@ -25,7 +25,7 @@ chords_midi_dict={
 
 
 #Read Chord Collection file
-data = pd.read_csv('data/Beatles_chord_sequence.csv')
+data = pd.read_csv('C:\Users\Luca\OneDrive\Documenti\GitHub\cpac_course_2021\labs\lab5_cognitive_agents\exercises\Music_generation_using_markov_chains\data\Beatles_chord_sequence.csv')
 data
 
 # Generate Bigrams
@@ -40,19 +40,19 @@ bigrams[:5]
 def predict_next_state(chord:str, data:list=bigrams):
     """Predict next chord based on current state."""
     # create list of bigrams which starts with current chord
-    bigrams_with_current_chord = # FILL CODE
+    bigrams_with_current_chord = [bigram for bigram in bigrams if bigram.split(' ')[0]==chord]
     # count appearance of each bigram
-    #count_appearance = # FILL CODE
+    count_appearance = dict(Counter(bigrams_with_current_chord))
 
     # convert appearance into probabilities
     for ngram in count_appearance.keys():
-        #count_appearance[ngram] = # FILL CODE
+        count_appearance[ngram] = count_appearance[ngram]/len(bigrams_with_current_chord)
     # create list of possible options for the next chord
-    options = # FILL CODE
+    options = [key.split(' ')[1] for key in count_appearance.keys()]
     # create  list of probability distribution
-    probabilities = # FILL CODE
+    probabilities = list(count_appearance.values())
     # return random prediction
-    return # FILL CODE
+    return np.random.choice(options, p=probabilities)
 
 
 
@@ -62,9 +62,9 @@ def generate_sequence(chord:str=None, data:list=bigrams, length:int=30):
     chords = []
     for n in range(length):
         # append next chord for the list
-        # FILL CODE
+        chords.append(predict_next_state(chord))
         # use last chord in sequence to predict next chord
-        # FILL CODE
+        chord = chords[-1]
     return chords  
 
 # GENERATE THE SEQUENCE
