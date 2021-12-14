@@ -20,7 +20,8 @@ class World {
     for (int i = 0; i < num; i++) {
       PVector l = new PVector(random(width),random(height));
       // FILL THE CODE --> instantiate DNA object
-      bloops.add(new Bloop(l));
+      DNA dna = new DNA();
+      bloops.add(new Bloop(l, dna));
     }
   }
 
@@ -28,7 +29,7 @@ class World {
   // Run the world
   void run() {
     // Deal with food
-    //food.run();
+    food.run();
     
     // Cycle through the ArrayList backwards b/c we are deleting
     for (int i = bloops.size()-1; i >= 0; i--) {
@@ -38,19 +39,21 @@ class World {
       
       /* UNCOMMENT FILL THE CODE */
       
-      /*
-       b.eat(food);
+      
+      b.eat(food);
       // If it's dead, kill it and make food FILL THE CODE
-      if (// FILL THE CODE: check bloop is dead) {
+      if (b.dead()) {
         // FILL THE CODE: remove bloop
+        PVector position = b.position;
+        bloops.remove(i);
         // FILL THE CODE: add food in the same position where the bloop died
+        food.add(position);
       }
-      */
-    
-
+      
       // Perhaps this bloop would like to make a baby?
-      //Bloop child = // FILL THE CODE perform reproduction
+      Bloop child =  b.reproduce();// FILL THE CODE perform reproduction
       // FILL THE CODE --> if reproduction is successful add bloop to the ecosystem
+      if(child != null) bloops.add(child);
       
     }
   }

@@ -10,13 +10,13 @@
 // When the creatures die, food is left behind
 
  
-//import oscP5.*;
-//import netP5.*;
+import oscP5.*;
+import netP5.*;
 
-//OscP5 oscP5;
+OscP5 oscP5;
 
-//int port = 57120;
-//NetAddress location;
+int port = 57120;
+NetAddress location;
 
 
 World world;
@@ -25,8 +25,8 @@ void setup() {
   size(700, 400);
   // World starts with 20 creatures
   // and 20 pieces of food
-  //location = new NetAddress("127.0.0.1",port);
-  //oscP5 = new OscP5(this,5500);
+  location = new NetAddress("127.0.0.1",port);
+  oscP5 = new OscP5(this,5500);
   world = new World(20);
   smooth();
 }
